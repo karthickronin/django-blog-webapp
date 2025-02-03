@@ -78,16 +78,19 @@ WSGI_APPLICATION = 'myapp.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 
+import os
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'blog',
-        'USER':'root',
-        'PASSWORD':'#kmad7707',
-        'HOST':'localhost',
-        'PORT':'3306'
+        'NAME': os.getenv('DB_NAME', 'blog'),  # Database name
+        'USER': os.getenv('DB_USER', 'root'),  # Database user
+        'PASSWORD': os.getenv('DB_PASSWORD', ''),  # Database password
+        'HOST': os.getenv('DB_HOST', '127.0.0.1'),  # MySQL host (Render database URL)
+        'PORT': os.getenv('DB_PORT', '3306'),  # MySQL port
     }
 }
+
 
 
 # Password validation
