@@ -79,17 +79,24 @@ WSGI_APPLICATION = 'myapp.wsgi.application'
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 
 import os
+import dj_database_url
+
 
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': os.getenv('DB_NAME', 'blog'),  # Database name
         'USER': os.getenv('DB_USER', 'root'),  # Database user
-        'PASSWORD': os.getenv('DB_PASSWORD', ''),  # Database password
-        'HOST': os.getenv('DB_HOST', '127.0.0.1'),  # MySQL host (Render database URL)
+        'PASSWORD': os.getenv('DB_PASSWORD', '#kmad7707'),  # Database password
+        'HOST': os.getenv('DB_HOST', 'https://tenzo-blog-webapp.onrender.com'),  # MySQL host (Render database URL)
         'PORT': os.getenv('DB_PORT', '3306'),  # MySQL port
+
     }
 }
+
+DATABASE_URL = os.getenv("DATABASE_URL")
+if DATABASE_URL:
+    DATABASES["default"] = dj_database_url.config(default=DATABASE_URL, engine="django.db.backends.mysql")
 
 
 
